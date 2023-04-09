@@ -1,6 +1,8 @@
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = "";
+const buttons = document.querySelectorAll(".btn");
+const display = document.querySelector(".display-text");
 
 const add = (a, b) => {
   if (!Number(b)) b = 0;
