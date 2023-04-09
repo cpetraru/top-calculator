@@ -2,34 +2,42 @@ let firstNumber = "";
 let operator = "";
 let secondNumber = "";
 let displayText = document.querySelector("#display-text");
+let total = "";
 const buttons = [...document.querySelectorAll(".btn")];
 const numbers = [...document.querySelectorAll(".number")];
 const operators = [...document.querySelectorAll(".operator")];
+const operateBtn = document.querySelector(".operate");
+const backBtn = document.querySelector(".back");
+const clearBtn = document.querySelector(".clear");
 let isFirstNumber = false;
 let isSecondNumber = false;
 let isOperator = false;
 
 const add = (a, b) => {
   if (!Number(b)) b = 0;
-  return Number(a) + Number(b);
+  total = Number(a) + Number(b);
+  return total;
 };
 
 const substract = (a, b) => {
   if (!Number(b)) b = 0;
-  return Number(a) - Number(b);
+  total = Number(a) - Number(b);
+  return total;
 };
 
 const multiply = (a, b) => {
   if (!Number(b)) b = 1;
-  return Number(a) * Number(b);
+  total = Number(a) * Number(b);
+  return total;
 };
 
 const devide = (a, b) => {
   if (!Number(b)) b = 1;
-  return Number(a) / Number(b);
+  total = Number(a) / Number(b);
+  return total;
 };
 
-const operate = (operator, x, y) => {
+function operate(operator, x, y) {
   switch (operator) {
     case "+":
       return add(x, y);
@@ -42,19 +50,13 @@ const operate = (operator, x, y) => {
     default:
       return "Please use a valid operator.";
   }
-};
+}
 
 // display logic
 buttons.forEach((btn) => {
   btn.addEventListener("click", () => {
-    switch (true) {
-      case btn.classList.contains("back"):
-        back();
-      case btn.classList.contains("clear"):
-        clear();
-    }
     if (!btn.classList.contains("back") && !btn.classList.contains("clear")) {
-      displayText.innerText += btn.textContent;
+      displayText.textContent += btn.textContent;
     }
   });
 });
@@ -70,9 +72,12 @@ operators.forEach((btn) => {
 function back() {
   let charArr = [];
   let newDisplay = "";
-  for (let i = 0; i < displayText.textContent.length - 1; i++) {
+  const displayLength = displayText.textContent.length;
+  for (let i = 0; i < displayLength; i++) {
     charArr.push(displayText.textContent[i]);
   }
+  if (charArr[displayLength - 1] === operator) operator = "";
+  charArr.pop();
   newDisplay = charArr.join("");
   displayText.textContent = newDisplay;
 }
@@ -104,3 +109,12 @@ function setOperator(op) {
   }
   isFirstNumber = true;
 }
+
+operateBtn.addEventListener("click", () => {
+  operate(operator, firstNumber, secondNumber);
+  displayText.textContent = total;
+});
+
+backBtn.addEventListener("click", () => back());
+
+clearBtn.addEventListener("click", () => clear());
