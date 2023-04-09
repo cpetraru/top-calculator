@@ -60,20 +60,11 @@ buttons.forEach((btn) => {
 });
 
 numbers.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    if (isFirstNumber === false) {
-      firstNumber += btn.textContent;
-    }
-  });
+  btn.addEventListener("click", () => setNumbers(btn));
 });
 
 operators.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    isFirstNumber = true;
-    if (isOperator === false) {
-      operator = btn.textContent;
-    }
-  });
+  btn.addEventListener("click", () => setOperator(btn));
 });
 
 function back() {
@@ -94,4 +85,22 @@ function clear() {
   isFirstNumber = false;
   isSecondNumber = false;
   isOperator = false;
+}
+
+function setNumbers(num) {
+  if (isFirstNumber === false) {
+    return (firstNumber += num.textContent);
+  } else if (isFirstNumber === true) {
+    return (secondNumber += num.textContent);
+  }
+}
+
+function setOperator(op) {
+  switch (true) {
+    case firstNumber === "":
+      firstNumber = "0";
+    case !isOperator:
+      operator = op.textContent;
+  }
+  isFirstNumber = true;
 }
