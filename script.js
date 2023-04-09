@@ -52,23 +52,6 @@ function operate(operator, x, y) {
   }
 }
 
-// display logic
-buttons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    if (!btn.classList.contains("back") && !btn.classList.contains("clear")) {
-      displayText.textContent += btn.textContent;
-    }
-  });
-});
-
-numbers.forEach((btn) => {
-  btn.addEventListener("click", () => setNumbers(btn));
-});
-
-operators.forEach((btn) => {
-  btn.addEventListener("click", () => setOperator(btn));
-});
-
 function back() {
   let charArr = [];
   let newDisplay = "";
@@ -80,13 +63,14 @@ function back() {
   charArr.pop();
   newDisplay = charArr.join("");
   displayText.textContent = newDisplay;
+  if (displayText.textContent === "") displayText.textContent = "0";
 }
 
 function clear() {
   firstNumber = "";
   secondNumber = "";
   operator = "";
-  displayText.textContent = "";
+  displayText.textContent = "0";
   isFirstNumber = false;
   isSecondNumber = false;
   isOperator = false;
@@ -110,6 +94,14 @@ function setOperator(op) {
   isFirstNumber = true;
 }
 
+numbers.forEach((btn) => {
+  btn.addEventListener("click", () => setNumbers(btn));
+});
+
+operators.forEach((btn) => {
+  btn.addEventListener("click", () => setOperator(btn));
+});
+
 operateBtn.addEventListener("click", () => {
   operate(operator, firstNumber, secondNumber);
   displayText.textContent = total;
@@ -118,3 +110,17 @@ operateBtn.addEventListener("click", () => {
 backBtn.addEventListener("click", () => back());
 
 clearBtn.addEventListener("click", () => clear());
+
+// display logic
+buttons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    if (
+      !btn.classList.contains("back") &&
+      !btn.classList.contains("clear") &&
+      !btn.classList.contains("operate")
+    ) {
+      if (displayText.textContent === "0") displayText.textContent = "";
+      displayText.textContent += btn.textContent;
+    }
+  });
+});
