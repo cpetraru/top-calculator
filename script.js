@@ -43,7 +43,7 @@ function operate(operator, x, y) {
       return add(x, y);
     case "-":
       return substract(x, y);
-    case "*":
+    case "x":
       return multiply(x, y);
     case "/":
       return devide(x, y);
@@ -122,8 +122,9 @@ buttons.forEach((btn) => {
       !btn.classList.contains("clear") &&
       !btn.classList.contains("operate")
     ) {
+      if (displayText.textContent === "0" && !isFirstNumber)
+        displayText.textContent = "";
       displayText.textContent += btn.textContent;
-      if (displayText.textContent === "0") displayText.textContent = "";
     }
   });
 });
