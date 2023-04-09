@@ -105,6 +105,9 @@ operators.forEach((btn) => {
 operateBtn.addEventListener("click", () => {
   operate(operator, firstNumber, secondNumber);
   displayText.textContent = total;
+  firstNumber = total;
+  secondNumber = "";
+  operator = "";
 });
 
 backBtn.addEventListener("click", () => back());
@@ -119,8 +122,8 @@ buttons.forEach((btn) => {
       !btn.classList.contains("clear") &&
       !btn.classList.contains("operate")
     ) {
-      if (displayText.textContent === "0") displayText.textContent = "";
       displayText.textContent += btn.textContent;
+      if (displayText.textContent === "0") displayText.textContent = "";
     }
   });
 });
