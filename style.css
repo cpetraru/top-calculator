@@ -1,8 +1,8 @@
 html {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*
@@ -14,40 +14,60 @@ body {
 } */
 
 .title {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .main {
-    height: 75%;
-    min-height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+  height: 75%;
+  min-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .display {
-    padding: 25px;
-    border: 1px solid black;
-    border-radius: 8px;
-    margin-bottom: 25px;
+  padding: 25px;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin-bottom: 25px;
 }
 
 .calculator {
-    width: 400px;
-    padding: 25px;
-    border: 1px solid black;
-    border-radius: 8px;
-    box-sizing: border-box;
+  width: 400px;
+  padding: 25px;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.buttons-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.action-buttons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
 .buttons-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
 }
 
 .btn {
-    padding: 25px;
+  padding: 25px;
+}
+
+#display-text {
+  margin: 10px;
+  padding: 0px;
+}
+
+.back {
+  font-size: 25px;
 }
