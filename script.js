@@ -16,25 +16,25 @@ let isOperator = false;
 const add = (a, b) => {
   if (!Number(b)) b = 0;
   total = Number(a) + Number(b);
-  return total;
+  return Math.round(total * 100) / 100;
 };
 
 const substract = (a, b) => {
   if (!Number(b)) b = 0;
   total = Number(a) - Number(b);
-  return total;
+  return Math.round(total * 100) / 100;
 };
 
 const multiply = (a, b) => {
   if (!Number(b)) b = 1;
   total = Number(a) * Number(b);
-  return total;
+  return Math.round(total * 100) / 100;
 };
 
 const devide = (a, b) => {
   if (!Number(b)) b = 1;
   total = Number(a) / Number(b);
-  return total;
+  return Math.round(total * 100) / 100;
 };
 
 function operate(operator, x, y) {
@@ -59,7 +59,13 @@ function back() {
   for (let i = 0; i < displayLength; i++) {
     charArr.push(displayText.textContent[i]);
   }
-  if (charArr[displayLength - 1] === operator) operator = "";
+  switch (true) {
+    case charArr[displayLength - 1] === operator:
+      operator = "";
+    case charArr.length === 1:
+      clear();
+  }
+  //   if (charArr[displayLength - 1] === operator) operator = "";
   charArr.pop();
   newDisplay = charArr.join("");
   displayText.textContent = newDisplay;
@@ -74,6 +80,7 @@ function clear() {
   isFirstNumber = false;
   isSecondNumber = false;
   isOperator = false;
+  total = "";
 }
 
 function setNumbers(num) {
@@ -90,8 +97,17 @@ function setOperator(op) {
       firstNumber = "0";
     case !isOperator:
       operator = op.textContent;
+    case (isFirstNumber, isSecondNumber, isOperator, total):
+      setTotal();
   }
   isFirstNumber = true;
+}
+
+function setTotal() {
+  operate(operator, firstNumber, secondNumber);
+  displayText.textContent = total;
+  firstNumber = total;
+  secondNumber = "";
 }
 
 numbers.forEach((btn) => {
@@ -103,10 +119,7 @@ operators.forEach((btn) => {
 });
 
 operateBtn.addEventListener("click", () => {
-  operate(operator, firstNumber, secondNumber);
-  displayText.textContent = total;
-  firstNumber = total;
-  secondNumber = "";
+  setTotal();
   operator = "";
 });
 
